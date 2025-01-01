@@ -1,9 +1,11 @@
+import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_carousel_widget/flutter_carousel_widget.dart';
 import 'package:talabat_online/utils/app_colors.dart';
+import 'package:talabat_online/utils/app_routes.dart';
 import 'package:talabat_online/view/widgets/prudact_item.dart';
-import 'package:talabat_online/view_model/home_cubit/home_cubit.dart';
+import 'package:talabat_online/view_models/home_cubit/home_cubit.dart';
 
 class HomeWidgetItem extends StatelessWidget {
   const HomeWidgetItem({super.key});
@@ -43,14 +45,21 @@ class HomeWidgetItem extends StatelessWidget {
                           ),
                           child: ClipRRect(
                             borderRadius: BorderRadius.circular(16),
-                            child: Image.network(
+                            child: CachedNetworkImage(
                               fit: BoxFit.cover,
-                              state.carouselItem[itemIndex].imgUrl,
+                              imageUrl: state.carouselItem[itemIndex].imgUrl,
+                              progressIndicatorBuilder:
+                                  (context, url, downloadProgress) => Center(
+                                      child:
+                                          CircularProgressIndicator.adaptive()),
+                              errorWidget: (context, url, error) =>
+                                  Icon(Icons.error),
                             ),
                           ),
                         ),
                       ),
                       options: FlutterCarouselOptions(
+                        showIndicator: false,
                         autoPlay: false,
                         height: size.height * 0.19,
                         //  showIndicator: false,
@@ -95,8 +104,19 @@ class HomeWidgetItem extends StatelessWidget {
                         crossAxisSpacing: 10,
                       ),
                       itemBuilder: (conttext, index) {
-                        return PrudactItem(
-                            prudactItemModel: state.prudact[index]);
+                        return InkWell(
+                          onTap: () {
+                            Navigator.of(
+                              context,
+                              rootNavigator: true,
+                            ).pushNamed(
+                              AppRoutes.prudactDetailsRoute,
+                              arguments: state.prudact[index].id,
+                            );
+                          },
+                          child: PrudactItem(
+                              prudactItemModel: state.prudact[index]),
+                        );
                       },
                     )
                   ],

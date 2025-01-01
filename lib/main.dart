@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:talabat_online/utils/app_router.dart';
 import 'package:talabat_online/view/pages/nav_bar.dart';
 
 void main() {
@@ -20,6 +21,7 @@ class TalabatOnline extends StatelessWidget {
         primaryColor: Color(0xff3700b3),
       ),
       home: NavBar(),
+      onGenerateRoute: AppRouter.onGenariteRout,
     );
   }
 }

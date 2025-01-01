@@ -1,3 +1,4 @@
+import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:talabat_online/model/prudact_item_model.dart';
 import 'package:talabat_online/utils/app_colors.dart';
@@ -25,8 +26,12 @@ class PrudactItem extends StatelessWidget {
               width: size.height * 0.3,
               child: Padding(
                 padding: const EdgeInsets.all(8.0),
-                child: Image.network(
-                  prudactItemModel.imgUrl,
+                child: CachedNetworkImage(
+                  imageUrl: prudactItemModel.imgUrl,
+                  progressIndicatorBuilder: (context, url, downloadProgress) {
+                    return Center(child: CircularProgressIndicator.adaptive());
+                  },
+                  errorWidget: (context, url, error) => Icon(Icons.error),
                 ),
               ),
             ),
