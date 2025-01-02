@@ -25,17 +25,18 @@ class CounterWidget extends StatelessWidget {
       child: Row(
         children: [
           IconButton(
-            onPressed: () => cubit.decrementCounter(prudactId),
-            // initalValue != null
-            //     ? cubit.icrementCounter(prudactId)
-            //     : cubit.icrementCounter(prudactId),
+            onPressed: () => initalValue != null
+                ? cubit.decrementCounter(prudactId, initalValue)
+                : cubit.decrementCounter(prudactId),
             icon: Icon(Icons.remove),
           ),
           Text(
             value.toString(),
           ),
           IconButton(
-            onPressed: () => cubit.icrementCounter(prudactId),
+            onPressed: () => initalValue != null
+                ? cubit.icrementCounter(prudactId, initalValue)
+                : cubit.icrementCounter(prudactId),
             icon: Icon(Icons.add),
           ),
         ],

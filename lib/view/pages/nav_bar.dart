@@ -134,7 +134,7 @@ class _NavBarState extends State<NavBar> {
         items: _navBarsItems,
         handleAndroidBackButtonPress: true,
         resizeToAvoidBottomInset: true,
-        stateManagement: true,
+        stateManagement: false,
         hideNavigationBarWhenKeyboardAppears: true,
         padding: const EdgeInsets.only(top: 5, bottom: 9),
         isVisible: true,
