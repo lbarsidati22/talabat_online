@@ -57,8 +57,10 @@ class _NavBarState extends State<NavBar> {
       title: 'Profile',
     ),
   ];
+  int currentIndex = 0;
   @override
   Widget build(BuildContext context) {
+    final size = MediaQuery.of(context).size;
     return Scaffold(
       appBar: AppBar(
         leading: Padding(
@@ -88,19 +90,44 @@ class _NavBarState extends State<NavBar> {
           ],
         ),
         actions: [
-          IconButton(
-            onPressed: () {},
-            icon: Icon(Icons.notifications),
-          ),
-          IconButton(
-            onPressed: () {},
-            icon: Icon(
-              Icons.search,
+          if (currentIndex == 0) ...[
+            IconButton(
+              onPressed: () {},
+              icon: Icon(Icons.notifications),
             ),
-          )
+            IconButton(
+              onPressed: () {},
+              icon: Icon(
+                Icons.search,
+              ),
+            ),
+          ],
+          if (currentIndex == 1) ...[
+            Container(
+              margin: EdgeInsets.only(right: 10),
+              width: size.width * 0.10,
+              height: size.height * 0.05,
+              decoration: BoxDecoration(
+                borderRadius: BorderRadius.circular(14),
+                color: AppColors.grey3,
+              ),
+              child: IconButton(
+                onPressed: () {},
+                icon: Icon(
+                  Icons.shopping_bag,
+                  color: AppColors.primaryColor,
+                ),
+              ),
+            ),
+          ]
         ],
       ),
       body: PersistentTabView(
+        onItemSelected: (index) {
+          setState(() {
+            currentIndex = index;
+          });
+        },
         context,
         controller: _controller,
         screens: _buildScreens,

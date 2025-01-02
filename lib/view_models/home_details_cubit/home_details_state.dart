@@ -21,6 +21,22 @@ final class PrudactDetailsError extends PrudactDetailsState {
 
 final class PrudactDetailsLeading extends PrudactDetailsState {}
 
+final class PrudactAddingToCart extends PrudactDetailsState {}
+
+final class PrudactAdedToCart extends PrudactDetailsState {
+  final String prudactId;
+
+  PrudactAdedToCart({required this.prudactId});
+}
+
+final class SelectedSizeLoaded extends PrudactDetailsState {
+  final PrudactSize size;
+
+  SelectedSizeLoaded({
+    required this.size,
+  });
+}
+
 final class QuantityCounterLoaded extends PrudactDetailsState {
   final int value;
 

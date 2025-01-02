@@ -19,7 +19,8 @@ class CounterWidget extends StatelessWidget {
   Widget build(BuildContext context) {
     return DecoratedBox(
       decoration: BoxDecoration(
-        color: AppColors.grey,
+        color: AppColors.grey2,
+        borderRadius: BorderRadius.circular(30),
       ),
       child: Row(
         children: [

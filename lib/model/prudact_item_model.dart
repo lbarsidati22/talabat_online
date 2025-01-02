@@ -1,3 +1,10 @@
+enum PrudactSize {
+  S,
+  M,
+  L,
+  XL,
+}
+
 class PrudactItemModel {
   final String name;
   final String id;
