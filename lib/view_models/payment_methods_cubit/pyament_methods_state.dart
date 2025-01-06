@@ -33,3 +33,13 @@ final class PaymentMethodsChosen extends PyamentMethodsState {
 
   PaymentMethodsChosen({required this.chosenPaymnt});
 }
+
+final class ConfirmPaymentLoaded extends PyamentMethodsState {}
+
+final class ConfirmPaymentLeading extends PyamentMethodsState {}
+
+final class ConfirmPaymentError extends PyamentMethodsState {
+  final String message;
+
+  ConfirmPaymentError({required this.message});
+}

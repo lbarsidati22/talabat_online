@@ -9,6 +9,7 @@ import 'package:talabat_online/view/widgets/payment_bottom_sheet.dart';
 import 'package:talabat_online/view/widgets/payment_method_item.dart';
 import 'package:talabat_online/view_models/checkout_cubit/checkout_cubit.dart';
 import 'package:talabat_online/view_models/checkout_cubit/checkout_state.dart';
+import 'package:talabat_online/view_models/payment_methods_cubit/pyament_methods_cubit.dart';
 
 class CheckoutPage extends StatelessWidget {
   const CheckoutPage({super.key});
@@ -24,9 +25,15 @@ class CheckoutPage extends StatelessWidget {
                 return SizedBox(
                   height: MediaQuery.of(context).size.height * 0.65,
                   width: double.infinity,
-                  child: PaymentBottomSheet(),
+                  child: BlocProvider(
+                    create: (context) =>
+                        PyamentMethodsCubit()..fetchPaymentMethods(),
+                    child: PaymentBottomSheet(),
+                  ),
                 );
-              });
+              }).then((onValue) {
+            BlocProvider.of<CheckoutCubit>(context).getCartItems();
+          });
         },
       );
     } else {

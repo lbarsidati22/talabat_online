@@ -36,6 +36,7 @@ class MainBottom extends StatelessWidget {
                 text!,
                 style: Theme.of(context).textTheme.titleMedium!.copyWith(
                       color: AppColors.withe,
+                      fontWeight: FontWeight.w600,
                     ),
               ),
       ),

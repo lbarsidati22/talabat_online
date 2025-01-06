@@ -24,7 +24,10 @@ class AppRouter {
       case AppRoutes.addNewCartRoute:
         return MaterialPageRoute(
           settings: settings,
-          builder: (_) => AddNewCartPage(),
+          builder: (_) => BlocProvider(
+            create: (context) => PyamentMethodsCubit(),
+            child: AddNewCartPage(),
+          ),
         );
       case AppRoutes.prudactDetailsRoute:
         final String prudactId = settings.arguments as String;
