@@ -1,4 +1,5 @@
 import 'package:talabat_online/model/add_to_cart_model.dart';
+import 'package:talabat_online/model/payment_cart_model.dart';
 
 sealed class CheckoutState {}
 
@@ -8,8 +9,10 @@ final class CheckoutLoaded extends CheckoutState {
   final List<AddToCartModel> cartItem;
   final double totalAmount;
   final int numOfPrudact;
+  final PaymentCartModel? chosenPaymentCarts;
 
   CheckoutLoaded({
+    required this.chosenPaymentCarts,
     required this.cartItem,
     required this.totalAmount,
     required this.numOfPrudact,

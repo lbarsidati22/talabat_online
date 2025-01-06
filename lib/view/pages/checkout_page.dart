@@ -1,14 +1,38 @@
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:talabat_online/model/payment_cart_model.dart';
 import 'package:talabat_online/utils/app_colors.dart';
 import 'package:talabat_online/view/widgets/checkout_headlins_item.dart';
 import 'package:talabat_online/view/widgets/empty_shopping_payment.dart';
+import 'package:talabat_online/view/widgets/payment_bottom_sheet.dart';
+import 'package:talabat_online/view/widgets/payment_method_item.dart';
 import 'package:talabat_online/view_models/checkout_cubit/checkout_cubit.dart';
 import 'package:talabat_online/view_models/checkout_cubit/checkout_state.dart';
 
 class CheckoutPage extends StatelessWidget {
   const CheckoutPage({super.key});
+  Widget buildPaymentMethods(
+      PaymentCartModel? chosenCart, BuildContext context) {
+    if (chosenCart != null) {
+      return PaymentMethodItem(
+        paymentCart: chosenCart,
+        onTap: () {
+          showModalBottomSheet(
+              context: context,
+              builder: (_) {
+                return SizedBox(
+                  height: MediaQuery.of(context).size.height * 0.65,
+                  width: double.infinity,
+                  child: PaymentBottomSheet(),
+                );
+              });
+        },
+      );
+    } else {
+      return EmptyShoppingPayment(title: 'Add Your Payment', isPayment: true);
+    }
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -43,6 +67,7 @@ class CheckoutPage extends StatelessWidget {
                 );
               } else if (state is CheckoutLoaded) {
                 final cartItem = state.cartItem;
+                final chosenPaymentCart = state.chosenPaymentCarts;
                 return SingleChildScrollView(
                   child: SafeArea(
                     child: Padding(
@@ -54,7 +79,10 @@ class CheckoutPage extends StatelessWidget {
                             title: 'Address',
                             onTap: () {},
                           ),
-                          EmptyShoppingPayment(title: 'Add Your Address'),
+                          EmptyShoppingPayment(
+                            title: 'Add Your Address',
+                            isPayment: false,
+                          ),
                           SizedBox(
                             height: 16,
                           ),
@@ -168,7 +196,7 @@ class CheckoutPage extends StatelessWidget {
                           SizedBox(
                             height: 8,
                           ),
-                          EmptyShoppingPayment(title: 'Add Payment Method '),
+                          buildPaymentMethods(chosenPaymentCart, context),
                           SizedBox(
                             height: 16,
                           ),

@@ -66,9 +66,7 @@ class _NavBarState extends State<NavBar> {
         leading: Padding(
           padding: const EdgeInsets.only(left: 5),
           child: CircleAvatar(
-            backgroundImage: NetworkImage(
-              'https://scontent.fsvq4-1.fna.fbcdn.net/v/t39.30808-6/448064160_1635279980581472_3917811417946539350_n.jpg?_nc_cat=106&ccb=1-7&_nc_sid=a5f93a&_nc_eui2=AeH8HfG5Pghmg-pWP_8T9BNIG7ewNitpeYgbt7A2K2l5iKCehss5l7qZdBrO32R_d5MG3AOdnkA6vbDnlS5zq1A3&_nc_ohc=vjVQszGTC0oQ7kNvgFi8Zlv&_nc_zt=23&_nc_ht=scontent.fsvq4-1.fna&_nc_gid=AxrmJqAZRGTROABRlToH1bg&oh=00_AYC5XSCocYLclsk5mxy8wICEX3zB9UfVOzJiqw253VDyMw&oe=677A68D5',
-            ),
+            backgroundImage: AssetImage('assets/images/lbar.jpg'),
           ),
         ),
         title: Column(
