@@ -55,6 +55,7 @@ class _ChoseLocationPageState extends State<ChoseLocationPage> {
                   height: 16,
                 ),
                 TextField(
+                  controller: locationController,
                   decoration: InputDecoration(
                     errorBorder: OutlineInputBorder(
                       borderSide: BorderSide(
@@ -84,6 +85,7 @@ class _ChoseLocationPageState extends State<ChoseLocationPage> {
                           onPressed: () {
                             if (locationController.text.isNotEmpty) {
                               cubit.addLocation(locationController.text);
+                              locationController.clear();
                             } else {
                               ScaffoldMessenger.of(context).showSnackBar(
                                 SnackBar(
