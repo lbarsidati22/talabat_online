@@ -25,7 +25,13 @@ final class LocationAded extends ChoseLocationState {
 final class LocationError extends ChoseLocationState {}
 
 final class ChosenLocation extends ChoseLocationState {
-  final LoactionItemModel chosenLocation;
+  final LoactionItemModel location;
 
-  ChosenLocation({required this.chosenLocation});
+  ChosenLocation({required this.location});
 }
+
+final class ConfirmAddressLeading extends ChoseLocationState {}
+
+final class ConfirmAddressLoaded extends ChoseLocationState {}
+
+final class ConfirmAddressError extends ChoseLocationState {}

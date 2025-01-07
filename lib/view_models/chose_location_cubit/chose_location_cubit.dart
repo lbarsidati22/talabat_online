@@ -32,6 +32,26 @@ class ChoseLocationCubit extends Cubit<ChoseLocationState> {
     selectedLacationID = id;
     final chosenLocation = dummyLocations
         .firstWhere((location) => location.id == selectedLacationID);
-    emit(ChosenLocation(chosenLocation: chosenLocation));
+    emit(ChosenLocation(location: chosenLocation));
+  }
+
+  void confirmAddress() {
+    emit(ConfirmAddressLeading());
+    Future.delayed(Duration(seconds: 1), () {
+      var chosenAddress = dummyLocations
+          .firstWhere((location) => location.id == selectedLacationID);
+      var previousAddress = dummyLocations.firstWhere(
+          (location) => location.isChosen == true,
+          orElse: () => dummyLocations.first);
+      previousAddress = previousAddress.copyWith(isChosen: false);
+      chosenAddress = chosenAddress.copyWith(isChosen: true);
+      final previousIndex = dummyLocations
+          .indexWhere((location) => location.id == previousAddress.id);
+      final chosenIndex = dummyLocations
+          .indexWhere((location) => location.id == chosenAddress.id);
+      dummyLocations[previousIndex] = previousAddress;
+      dummyLocations[chosenIndex] = chosenAddress;
+      emit(ConfirmAddressLoaded());
+    });
   }
 }

@@ -69,7 +69,17 @@ class _ChoseLocationPageState extends State<ChoseLocationPage> {
                     ),
                     hintText: 'City-Country',
                     suffixIcon:
-                        BlocBuilder<ChoseLocationCubit, ChoseLocationState>(
+                        BlocConsumer<ChoseLocationCubit, ChoseLocationState>(
+                      listenWhen: (previous, current) =>
+                          current is ConfirmAddressLoaded ||
+                          current is LocationAded,
+                      listener: (context, state) {
+                        if (state is LocationAded) {
+                          locationController.clear();
+                        } else if (state is ConfirmAddressLoaded) {
+                          Navigator.pop(context);
+                        }
+                      },
                       buildWhen: (previous, current) =>
                           current is LocationAdding ||
                           current is LocationAded ||
@@ -85,7 +95,6 @@ class _ChoseLocationPageState extends State<ChoseLocationPage> {
                           onPressed: () {
                             if (locationController.text.isNotEmpty) {
                               cubit.addLocation(locationController.text);
-                              locationController.clear();
                             } else {
                               ScaffoldMessenger.of(context).showSnackBar(
                                 SnackBar(
@@ -145,7 +154,7 @@ class _ChoseLocationPageState extends State<ChoseLocationPage> {
                                 current is ChosenLocation,
                             builder: (context, state) {
                               if (state is ChosenLocation) {
-                                final choseLocation = state.chosenLocation;
+                                final choseLocation = state.location;
                                 return LocationIten(
                                   backgoundColor:
                                       choseLocation.id == location.id
@@ -174,10 +183,27 @@ class _ChoseLocationPageState extends State<ChoseLocationPage> {
                   },
                 ),
                 SizedBox(height: 20),
-                MainBottom(
-                  text: 'Confirm Address ',
-                  onTap: () {},
-                ),
+                BlocBuilder<ChoseLocationCubit, ChoseLocationState>(
+                  bloc: cubit,
+                  buildWhen: (previouse, current) =>
+                      current is ConfirmAddressError ||
+                      current is ConfirmAddressLeading ||
+                      current is ConfirmAddressLoaded,
+                  builder: (context, state) {
+                    if (state is ConfirmAddressLeading) {
+                      return MainBottom(
+                        isLeading: true,
+                        onTap: () {},
+                      );
+                    }
+                    return MainBottom(
+                      text: 'Confirm Address ',
+                      onTap: () {
+                        cubit.confirmAddress();
+                      },
+                    );
+                  },
+                )
               ],
             ),
           ),

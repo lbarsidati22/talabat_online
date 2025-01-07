@@ -17,7 +17,7 @@ class LocationIten extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return InkWell(
-      onTap: () {},
+      onTap: onTap,
       child: Padding(
         padding: const EdgeInsets.all(4.0),
         child: DecoratedBox(
