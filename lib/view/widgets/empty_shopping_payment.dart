@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:talabat_online/utils/app_colors.dart';
 import 'package:talabat_online/utils/app_routes.dart';
+import 'package:talabat_online/view_models/checkout_cubit/checkout_cubit.dart';
 
 class EmptyShoppingPayment extends StatelessWidget {
   final String title;
@@ -10,11 +12,16 @@ class EmptyShoppingPayment extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final checkoutCubit = BlocProvider.of<CheckoutCubit>(context);
     return InkWell(
       onTap: () {
         if (isPayment) {
           Navigator.of(context, rootNavigator: true)
-              .pushNamed(AppRoutes.addNewCartRoute);
+              .pushNamed(AppRoutes.addNewCartRoute)
+              .then((onValue) => checkoutCubit.getCartItems());
+        } else {
+          Navigator.of(context, rootNavigator: true)
+              .pushNamed(AppRoutes.choseLocationRaoute);
         }
       },
       child: Container(

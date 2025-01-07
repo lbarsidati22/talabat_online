@@ -1,8 +1,10 @@
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:talabat_online/model/location_item_model.dart';
 import 'package:talabat_online/model/payment_cart_model.dart';
 import 'package:talabat_online/utils/app_colors.dart';
+import 'package:talabat_online/utils/app_routes.dart';
 import 'package:talabat_online/view/widgets/checkout_headlins_item.dart';
 import 'package:talabat_online/view/widgets/empty_shopping_payment.dart';
 import 'package:talabat_online/view/widgets/payment_bottom_sheet.dart';
@@ -41,6 +43,50 @@ class CheckoutPage extends StatelessWidget {
     }
   }
 
+  Widget buildLocationItem(
+      LoactionItemModel? choseLocation, BuildContext context) {
+    if (choseLocation != null) {
+      return Row(
+        children: [
+          ClipRRect(
+            borderRadius: BorderRadius.circular(16),
+            child: CachedNetworkImage(
+              height: 100,
+              width: 100,
+              fit: BoxFit.cover,
+              imageUrl: choseLocation.imgUrl,
+            ),
+          ),
+          SizedBox(width: 16),
+          Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              Text(
+                choseLocation.city,
+                style: Theme.of(context).textTheme.titleLarge!.copyWith(
+                      fontWeight: FontWeight.w600,
+                    ),
+              ),
+              SizedBox(height: 6),
+              Text(
+                '${choseLocation.city}-${choseLocation.country}',
+                style: Theme.of(context).textTheme.titleMedium!.copyWith(
+                      fontWeight: FontWeight.w600,
+                      color: AppColors.grey,
+                    ),
+              ),
+            ],
+          ),
+        ],
+      );
+    } else {
+      return CheckoutHeadlinsItem(
+        title: 'Address',
+        onTap: () {},
+      );
+    }
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -74,6 +120,7 @@ class CheckoutPage extends StatelessWidget {
                 );
               } else if (state is CheckoutLoaded) {
                 final cartItem = state.cartItem;
+                final choseLocation = state.choseLocations;
                 final chosenPaymentCart = state.chosenPaymentCarts;
                 return SingleChildScrollView(
                   child: SafeArea(
@@ -84,12 +131,13 @@ class CheckoutPage extends StatelessWidget {
                         children: [
                           CheckoutHeadlinsItem(
                             title: 'Address',
-                            onTap: () {},
+                            onTap: () {
+                              Navigator.of(context)
+                                  .pushNamed(AppRoutes.choseLocationRaoute)
+                                  .then((onValue) => cubit.getCartItems());
+                            },
                           ),
-                          EmptyShoppingPayment(
-                            title: 'Add Your Address',
-                            isPayment: false,
-                          ),
+                          buildLocationItem(choseLocation, context),
                           SizedBox(
                             height: 16,
                           ),
