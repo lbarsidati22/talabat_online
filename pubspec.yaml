@@ -40,6 +40,9 @@ dependencies:
   bloc: ^8.1.4
   cached_network_image: ^3.4.1
   flutter_dash: ^1.0.0
+  firebase_auth: ^5.4.2
+  firebase_core: ^3.11.0
+  cloud_firestore: ^5.6.3
   
 dev_dependencies:
   flutter_test:

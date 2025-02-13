@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "428944702893",
+    "project_id": "talabat-online",
+    "storage_bucket": "talabat-online.firebasestorage.app"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:428944702893:android:9d00d1a2e227758f273524",
+        "android_client_info": {
+          "package_name": "com.example.talabat_online"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyC2C2gmgIxYvMq_RtbSNdovgZY59LVxX0A"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:talabat_online/utils/app_colors.dart';
-import 'package:talabat_online/view_models/home_details_cubit/home_details_cubit.dart';
 
 class CounterWidget extends StatelessWidget {
   final dynamic cubit;

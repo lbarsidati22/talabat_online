@@ -1,8 +1,6 @@
-import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:talabat_online/utils/app_colors.dart';
-import 'package:talabat_online/utils/app_router.dart';
 import 'package:talabat_online/utils/app_routes.dart';
 import 'package:talabat_online/view/widgets/cart_item_widget.dart';
 import 'package:talabat_online/view_models/cart_cubit/cart_cubit.dart';

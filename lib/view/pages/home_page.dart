@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_carousel_widget/flutter_carousel_widget.dart';
 import 'package:talabat_online/utils/app_colors.dart';
 import 'package:talabat_online/view/widgets/category_item.dart';
 import 'package:talabat_online/view/widgets/home_widget_item.dart';

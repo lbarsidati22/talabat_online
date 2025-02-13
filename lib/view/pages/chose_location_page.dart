@@ -1,8 +1,6 @@
-import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:talabat_online/utils/app_colors.dart';
-import 'package:talabat_online/view/widgets/lable_with_text_feild.dart';
 import 'package:talabat_online/view/widgets/location_iten.dart';
 import 'package:talabat_online/view/widgets/main_bottom.dart';
 import 'package:talabat_online/view_models/chose_location_cubit/chose_location_cubit.dart';
